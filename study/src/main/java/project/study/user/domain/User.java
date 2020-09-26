@@ -26,7 +26,7 @@ public class User extends BaseAuditingTime { //BaseAuditingUser로 교체할것
     private String userLoginId;
     private String pass1;
     private String pass2;
-    private String deleteYn;
+    private String deleteYn;//
 
     @Enumerated(EnumType.STRING)
     private UserType userType;
