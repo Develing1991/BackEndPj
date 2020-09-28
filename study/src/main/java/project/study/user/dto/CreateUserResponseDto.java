@@ -23,7 +23,7 @@ public class CreateUserResponseDto {
         name = user.getName();
         userLoginId = user.getUserLoginId();
         pass1 = user.getPass1();
-        pass2 = user.getPass2();
+        //pass2 = user.getPass2();
         userType = user.getUserType();
         city = user.getAddress().getCity();
         street = user.getAddress().getStreet();

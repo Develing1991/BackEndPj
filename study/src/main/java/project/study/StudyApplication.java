@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.web.context.annotation.SessionScope;
+import project.study.user.domain.User;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -22,4 +24,9 @@ public class StudyApplication {
 		return () -> Optional.of(UUID.randomUUID().toString());
 	}
 
+	@Bean("loginUserBean")
+	@SessionScope
+	public User loginUserBean(){
+		return new User();
+	}
 }
