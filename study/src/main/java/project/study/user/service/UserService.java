@@ -55,6 +55,7 @@ public class UserService {
         Optional<User> userLoginInfo = userRepository.findByUserLoginIdAndPass1(userLoginResponseDto.getUserLoginId(), userLoginResponseDto.getPass1());
         System.out.println(userLoginInfo.isEmpty());
         if(!userLoginInfo.isEmpty()){
+            loginUserBean.setId(userLoginInfo.get().getId());
             loginUserBean.setUserLoginId(userLoginResponseDto.getUserLoginId());
             loginUserBean.setName(userLoginInfo.get().getName());
             loginUserBean.setUserLogin(true);

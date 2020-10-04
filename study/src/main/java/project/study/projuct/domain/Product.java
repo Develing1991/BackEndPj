@@ -2,6 +2,7 @@ package project.study.projuct.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import project.study.common.domain.BaseAuditingUser;
 
 import javax.persistence.*;
 
@@ -12,11 +13,14 @@ import javax.persistence.*;
                     ,initialValue = 1,allocationSize = 1)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "DTYPE")
-public abstract class Product {
+public abstract class Product extends BaseAuditingUser {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "PRODUCT_SEQ_GENERATOR")
     @Column(name = "product_id")
     private Long id;
+
+    private String deleteYn;
+    private String cate;
 
     private String name;
     private int price;

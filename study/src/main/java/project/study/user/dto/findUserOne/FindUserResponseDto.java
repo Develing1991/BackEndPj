@@ -15,6 +15,7 @@ public class FindUserResponseDto {
     private String userLoginId;
     private UserType userType;
     private Address address;
+    private String deleteYn;
     private List<UserOrderResponseDto> orders;
     private List<UserBoardResponseDto> boards;
 
@@ -24,7 +25,7 @@ public class FindUserResponseDto {
         userLoginId = user.getUserLoginId();
         userType = user.getUserType();
         address = user.getAddress();
-
+        deleteYn = user.getDeleteYn();
         boards = user.getBoards().stream()
                 .map(board -> new UserBoardResponseDto(board))
                 .collect(Collectors.toList());
