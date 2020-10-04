@@ -53,7 +53,8 @@ public class Order extends BaseAuditingUser{
     }
 
 
-    public static Order createOrder(User user, Delivery delivery,OrderItem... orderItems) {
+//    public static Order createOrder(User user, Delivery delivery,OrderItem... orderItems) {
+    public static Order createOrder(User user, Delivery delivery,List<OrderItem> orderItems) {
         Order order = new Order();
         order.setUser(user);
         order.setDelivery(delivery);
@@ -90,4 +91,6 @@ public class Order extends BaseAuditingUser{
     public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
+
+    
 }

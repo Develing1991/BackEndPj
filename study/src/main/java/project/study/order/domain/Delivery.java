@@ -32,4 +32,8 @@ public class Delivery {
         this.order = order;
         deliveryStatus = DeliveryStatus.READY;
     }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 }
