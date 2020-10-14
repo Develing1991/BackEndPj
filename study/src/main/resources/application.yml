@@ -10,7 +10,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     properties:
       hibernate:
         #        show_sql: true
@@ -25,4 +25,4 @@ logging:
     org.hibernate.type: trace
 
 server:
-  port: 8081
+  port: 8089
