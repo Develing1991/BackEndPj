@@ -26,7 +26,7 @@ public class UserRepositoryCustom {
         //수정시 애내 화면에서 조회셋팅 후..해야 nullpoint 안뜸.
         updateUser.setName(updateUserRequestDto.getName());
         updateUser.setPass1(updateUserRequestDto.getPass1());
-        updateUser.setDeleteYn("N");
+        updateUser.setDeleteYn(updateUserRequestDto.getDeleteYn());
         updateUser.setAddress(new Address(updateUserRequestDto.getCity()
                                 ,updateUserRequestDto.getStreet()
                                 ,updateUserRequestDto.getZipcode()));
