@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import project.study.user.domain.User;
 import project.study.user.dto.CreateUserRequestDto;
 import project.study.user.dto.CreateUserResponseDto;
+import project.study.user.dto.findUserList.FindUserListRequestDto;
 import project.study.user.dto.findUserList.FindUserListResponseDto;
 import project.study.user.dto.findUserOne.FindUserResponseDto;
 import project.study.user.dto.UserLoginResponseDto;
@@ -71,13 +72,15 @@ public class UserController {
     /**
      * 회원 리스트
      */
-    @GetMapping("/user")
-    public Page<FindUserListResponseDto> findUserList(@RequestParam(value = "name",defaultValue = "All")String name,Pageable pageable){
+    @PostMapping("/userlist")
+    public Page<FindUserListResponseDto> findUserList(@RequestBody(required = false) FindUserListRequestDto findUserListRequestDto, Pageable pageable){
         Page<User> userList; //리팩토링 해야함.. qeuryDsl
-        if(name.equals("All")){
-            userList = userRepository.findAll(pageable);
+        if(findUserListRequestDto.getUserLoginId() != null){ //로그인 아이디 조회
+            userList = userRepository.findByUserLoginId(findUserListRequestDto.getUserLoginId(),pageable);
+        }else if(findUserListRequestDto.getName() != null){
+            userList = userRepository.findByName(findUserListRequestDto.getName(), pageable);
         }else{
-            userList = userRepository.findByName(name, pageable);
+            userList = userRepository.findAll(pageable);
         }
 
         Page<FindUserListResponseDto> map = userList.map(user -> new FindUserListResponseDto(user));
