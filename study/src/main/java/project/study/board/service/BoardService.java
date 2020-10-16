@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import project.study.board.domain.Board;
+import project.study.board.domain.BoardType;
 import project.study.board.dto.CreateBoardRequestDto;
 import project.study.board.dto.FindBoardResponseDto;
 import project.study.board.dto.UpdateBoardRequestDto;
@@ -53,15 +54,18 @@ public class BoardService {
         return boardRepositoryCustom.findBoardOne(id);
     }
 
-    public Page<FindBoardResponseDto> findBoardList(String title, Pageable pageable){
+    public Page<FindBoardResponseDto> findBoardList(BoardType type,String title,  Pageable pageable){
+        title = "%" + title +"%";
         Page<FindBoardResponseDto> map;
-        if(title.equals("All")){
-            Page<Board> findAll = boardRepository.findAll(pageable);
-            map = findAll.map(board -> new FindBoardResponseDto(board));
-        }else{
-            Page<Board> findBoard = boardRepository.findAllByTitle(title, pageable);
-            map = findBoard.map(board -> new FindBoardResponseDto(board));
-        }
+//        if(type.equals("null")){
+//            Page<Board> findAll = boardRepository.findAll(pageable);
+//            map = findAll.map(board -> new FindBoardResponseDto(board));
+//        }else{
+//            Page<Board> findBoard = boardRepository.findAllByBoardType(type, pageable);
+//            map = findBoard.map(board -> new FindBoardResponseDto(board));
+//        }
+        Page<Board> findBoard = boardRepository.findAllByBoardTypeAndTitleLike(type, title,pageable);
+        map = findBoard.map(board -> new FindBoardResponseDto(board));
         return map;
     }
 

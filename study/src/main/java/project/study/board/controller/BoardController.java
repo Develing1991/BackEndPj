@@ -5,11 +5,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import project.study.board.domain.Board;
+import project.study.board.domain.BoardType;
 import project.study.board.dto.CreateBoardRequestDto;
 import project.study.board.dto.FindBoardResponseDto;
 import project.study.board.dto.UpdateBoardRequestDto;
 import project.study.board.repository.BoardRepository;
 import project.study.board.service.BoardService;
+import project.study.user.domain.User;
 
 import java.util.List;
 
@@ -39,9 +41,11 @@ public class BoardController {
     /**
      * 게시판 조회 list
      */
-    @GetMapping("/board")
-    public Page<FindBoardResponseDto> findBoardList(@RequestParam(value = "title",defaultValue = "All")String title, Pageable pageable){
-        return boardService.findBoardList(title, pageable);
+    @GetMapping("/board/list/{type}")
+    public Page<FindBoardResponseDto> findBoardList(@PathVariable(value = "type",required = false) BoardType type,
+                                                    @RequestParam(value = "title", defaultValue = "%%") String title,
+                                                    Pageable pageable){
+        return boardService.findBoardList(type, title, pageable);
     }
 
     /**

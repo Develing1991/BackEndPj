@@ -2,6 +2,7 @@ package project.study.board.dto;
 
 import lombok.Data;
 import project.study.board.domain.Board;
+import project.study.board.domain.BoardType;
 import project.study.user.domain.User;
 
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ public class FindBoardResponseDto {
     private String contents;
     private String deleteYn;
     private int views;
+    private BoardType boardType;
 
     private Long userId;
     private String userLoginId;
@@ -29,6 +31,7 @@ public class FindBoardResponseDto {
         contents = board.getContents();
         deleteYn = board.getDeleteYn();
         views = board.getViews();
+        boardType = board.getBoardType();
 
         userId = board.getUser().getId();
         userLoginId = board.getUser().getUserLoginId();
