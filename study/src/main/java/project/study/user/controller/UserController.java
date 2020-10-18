@@ -11,6 +11,7 @@ import project.study.user.dto.findUserList.FindUserListRequestDto;
 import project.study.user.dto.findUserList.FindUserListResponseDto;
 import project.study.user.dto.findUserOne.FindUserResponseDto;
 import project.study.user.dto.UserLoginResponseDto;
+import project.study.user.dto.findUserOne.LoginUserResponseDto;
 import project.study.user.dto.updateUser.UpdateUserRequestDto;
 import project.study.user.repository.UserRepository;
 import project.study.user.repository.UserRepositoryCustom;
@@ -37,14 +38,14 @@ public class UserController {
      * 로그인
      */
     @PostMapping("/login")
-    public void loginPro(@RequestBody UserLoginResponseDto userLoginResponseDto) {
-        boolean loginUserInfo = userService.getLoginUserInfo(userLoginResponseDto);
-        if (loginUserInfo){
+    public LoginUserResponseDto loginPro(@RequestBody UserLoginResponseDto userLoginResponseDto) {
+        LoginUserResponseDto loginUserInfo = userService.getLoginUserInfo(userLoginResponseDto);
+        if (loginUserInfo.getId() > 0L){
             System.out.println("로그인 성공");
         }else{
             System.out.println("로그인 실패");
         }
-
+        return loginUserInfo;
     }
 
     /**

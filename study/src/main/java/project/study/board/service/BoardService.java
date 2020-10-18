@@ -33,10 +33,10 @@ public class BoardService {
 
     @Transactional
     public Long createBoard(CreateBoardRequestDto createBoardRequestDto) {
-        if(loginUserBean.getId() == null){
-            throw new IllegalStateException("로그인이 필요한 서비스 입니다.");
-        }
-        User findUser = userRepository.findById(loginUserBean.getId()).get();
+//        if(loginUserBean.getId() == null){
+//            throw new IllegalStateException("로그인이 필요한 서비스 입니다.");
+//        }
+        User findUser = userRepository.findById(createBoardRequestDto.getUserId()).get();
         return boardRepositoryCustom.createBoard(findUser, createBoardRequestDto);
     }
 

@@ -7,6 +7,7 @@ import project.study.user.domain.User;
 import project.study.user.dto.CreateUserRequestDto;
 import project.study.user.dto.CreateUserResponseDto;
 import project.study.user.dto.UserLoginResponseDto;
+import project.study.user.dto.findUserOne.LoginUserResponseDto;
 import project.study.user.dto.updateUser.UpdateUserRequestDto;
 import project.study.user.repository.UserRepository;
 import project.study.user.repository.UserRepositoryCustom;
@@ -51,18 +52,27 @@ public class UserService {
         return userResponseDto;
     }
 
-    public boolean getLoginUserInfo(UserLoginResponseDto userLoginResponseDto){
-        Optional<User> userLoginInfo = userRepository.findByUserLoginIdAndPass1(userLoginResponseDto.getUserLoginId(), userLoginResponseDto.getPass1());
-        System.out.println(userLoginInfo.isEmpty());
-        if(!userLoginInfo.isEmpty()){
-            loginUserBean.setId(userLoginInfo.get().getId());
-            loginUserBean.setUserLoginId(userLoginResponseDto.getUserLoginId());
-            loginUserBean.setName(userLoginInfo.get().getName());
-            loginUserBean.setUserLogin(true);
-            loginUserBean.setUserType(userLoginInfo.get().getUserType()); //유저타입 admin, normal
-            return true;
+    public LoginUserResponseDto getLoginUserInfo(UserLoginResponseDto userLoginResponseDto){
+        //Optional<User> userLoginInfo = userRepository.findByUserLoginIdAndPass1(userLoginResponseDto.getUserLoginId(), userLoginResponseDto.getPass1());
+//        System.out.println(userLoginInfo.isEmpty());
+//        if(!userLoginInfo.isEmpty()){
+//            loginUserBean.setId(userLoginInfo.get().getId());
+//            loginUserBean.setUserLoginId(userLoginResponseDto.getUserLoginId());
+//            loginUserBean.setName(userLoginInfo.get().getName());
+//            loginUserBean.setUserLogin(true);
+//            loginUserBean.setUserType(userLoginInfo.get().getUserType()); //유저타입 admin, normal
+//
+//            return loginUserBean.getId();
+//        }else{
+//            return 0L;
+//        }
+        Optional<User> byUserLoginIdAndPass1 = userRepository.findByUserLoginIdAndPass1(userLoginResponseDto.getUserLoginId(), userLoginResponseDto.getPass1());
+        if(byUserLoginIdAndPass1.isPresent()){
+            LoginUserResponseDto loginUserResponseDto = new LoginUserResponseDto(byUserLoginIdAndPass1.get());
+            return loginUserResponseDto;
         }else{
-            return false;
+            LoginUserResponseDto loginUserResponseDto = new LoginUserResponseDto(0L);
+            return loginUserResponseDto;
         }
     }
 

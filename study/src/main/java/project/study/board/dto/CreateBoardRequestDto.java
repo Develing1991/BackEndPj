@@ -5,6 +5,7 @@ import project.study.board.domain.BoardType;
 
 @Data
 public class CreateBoardRequestDto {
+    private Long userId;
     private String title;
     private String contents;
     private BoardType boardType;
